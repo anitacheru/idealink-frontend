@@ -142,15 +142,15 @@ export default function LandingPage() {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto mt-16">
               <div>
-                <p className="text-4xl font-bold text-blue-600">500+</p>
+                <p className="text-4xl font-bold text-blue-600">4</p>
                 <p className="text-gray-600 mt-1">Ideas Shared</p>
               </div>
               <div>
-                <p className="text-4xl font-bold text-indigo-600">200+</p>
+                <p className="text-4xl font-bold text-indigo-600">3</p>
                 <p className="text-gray-600 mt-1">Active Investors</p>
               </div>
               <div>
-                <p className="text-4xl font-bold text-purple-600">$2M+</p>
+                <p className="text-4xl font-bold text-purple-600">$10</p>
                 <p className="text-gray-600 mt-1">Funding Raised</p>
               </div>
             </div>
