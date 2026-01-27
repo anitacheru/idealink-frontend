@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
-export default function LusionLandingPage() {
+export default function LandingPage() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 300], [0, 100]);
@@ -23,9 +24,9 @@ export default function LusionLandingPage() {
     <div className="bg-black text-white overflow-hidden">
       {/* Animated Background */}
       <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-blue-900/20" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#2c3e50]/20 via-black to-[#4ca1af]/20" />
         <motion.div
-          className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-purple-500/10 rounded-full blur-3xl"
+          className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-[#4ca1af]/10 rounded-full blur-3xl"
           animate={{
             x: mousePosition.x,
             y: mousePosition.y,
@@ -34,7 +35,7 @@ export default function LusionLandingPage() {
           transition={{ duration: 3, repeat: Infinity }}
         />
         <motion.div
-          className="absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-blue-500/10 rounded-full blur-3xl"
+          className="absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-[#2c3e50]/10 rounded-full blur-3xl"
           animate={{
             x: -mousePosition.x,
             y: -mousePosition.y,
@@ -50,37 +51,50 @@ export default function LusionLandingPage() {
         animate={{ y: 0 }}
         className="fixed top-0 w-full z-50 px-8 py-6 flex justify-between items-center backdrop-blur-sm"
       >
-        <motion.div
-          className="text-xl md:text-2xl font-bold"
-          whileHover={{ scale: 1.05 }}
-        >
-          <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-            IdeaLink
-          </span>
-        </motion.div>
+        <Link to="/">
+          <motion.div
+            className="text-xl md:text-2xl font-bold"
+            whileHover={{ scale: 1.05 }}
+          >
+            <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              IdeaLink
+            </span>
+          </motion.div>
+        </Link>
 
         <div className="flex gap-8 items-center">
           <motion.a
             href="#about"
-            className="text-sm md:text-base text-gray-400 hover:text-white transition-colors"
+            className="text-sm md:text-base text-gray-400 hover:text-white transition-colors hidden md:block"
             whileHover={{ y: -2 }}
           >
             About
           </motion.a>
           <motion.a
             href="#features"
-            className="text-sm md:text-base text-gray-400 hover:text-white transition-colors"
+            className="text-sm md:text-base text-gray-400 hover:text-white transition-colors hidden md:block"
             whileHover={{ y: -2 }}
           >
             Features
           </motion.a>
-          <motion.button
-            className="px-6 py-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full text-xs md:text-sm font-semibold"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Get Started
-          </motion.button>
+          <Link to="/login">
+            <motion.button
+              className="px-4 py-2 border border-gray-700 rounded-full text-xs md:text-sm font-semibold text-gray-300 hover:bg-gray-800 transition-all"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Login
+            </motion.button>
+          </Link>
+          <Link to="/signup">
+            <motion.button
+              className="px-6 py-2 bg-gradient-to-r from-[#4ca1af] to-[#2c3e50] rounded-full text-xs md:text-sm font-semibold"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Sign Up
+            </motion.button>
+          </Link>
         </div>
       </motion.nav>
 
@@ -102,7 +116,7 @@ export default function LusionLandingPage() {
               }}
             >
               <span className="block">Transform</span>
-              <span className="block bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-[#4ca1af] via-[#3d8da7] to-[#2c3e50] bg-clip-text text-transparent">
                 Ideas Into
               </span>
               <span className="block">Reality</span>
@@ -124,26 +138,30 @@ export default function LusionLandingPage() {
             transition={{ duration: 1, delay: 0.6 }}
             className="flex gap-4 md:gap-6 justify-center"
           >
-            <motion.button
-              className="px-6 md:px-8 py-3 md:py-4 bg-white text-black rounded-full font-semibold text-sm md:text-base"
-              whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(255,255,255,0.3)' }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Explore Ideas
-            </motion.button>
-            <motion.button
-              className="px-6 md:px-8 py-3 md:py-4 border border-white/20 rounded-full font-semibold text-sm md:text-base backdrop-blur-sm"
-              whileHover={{ scale: 1.05, borderColor: 'rgba(255,255,255,0.5)' }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Submit Idea
-            </motion.button>
+            <Link to="/signup">
+              <motion.button
+                className="px-6 md:px-8 py-3 md:py-4 bg-white text-black rounded-full font-semibold text-sm md:text-base"
+                whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(255,255,255,0.3)' }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Explore Ideas
+              </motion.button>
+            </Link>
+            <Link to="/signup">
+              <motion.button
+                className="px-6 md:px-8 py-3 md:py-4 border border-white/20 rounded-full font-semibold text-sm md:text-base backdrop-blur-sm"
+                whileHover={{ scale: 1.05, borderColor: 'rgba(255,255,255,0.5)' }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Submit Idea
+              </motion.button>
+            </Link>
           </motion.div>
         </div>
 
         {/* Floating Elements */}
         <motion.div
-          className="absolute top-1/4 left-1/4 w-24 h-24 md:w-32 md:h-32 border border-purple-500/30 rounded-full"
+          className="absolute top-1/4 left-1/4 w-24 h-24 md:w-32 md:h-32 border border-[#4ca1af]/30 rounded-full"
           animate={{
             y: [0, -30, 0],
             rotate: [0, 180, 360],
@@ -151,7 +169,7 @@ export default function LusionLandingPage() {
           transition={{ duration: 8, repeat: Infinity }}
         />
         <motion.div
-          className="absolute bottom-1/3 right-1/4 w-20 h-20 md:w-24 md:h-24 border border-blue-500/30 rounded-lg"
+          className="absolute bottom-1/3 right-1/4 w-20 h-20 md:w-24 md:h-24 border border-[#2c3e50]/30 rounded-lg"
           animate={{
             y: [0, 30, 0],
             rotate: [0, -180, -360],
@@ -177,7 +195,7 @@ export default function LusionLandingPage() {
       </motion.section>
 
       {/* About Section with Parallax */}
-      <section className="relative min-h-screen flex items-center justify-center px-8 py-24 md:py-32">
+      <section id="about" className="relative min-h-screen flex items-center justify-center px-8 py-24 md:py-32">
         <motion.div
           style={{ y: y1 }}
           className="max-w-5xl mx-auto relative z-10"
@@ -189,7 +207,7 @@ export default function LusionLandingPage() {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8">
-              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#4ca1af] to-[#2c3e50] bg-clip-text text-transparent">
                 What is IdeaLink?
               </span>
             </h2>
@@ -202,7 +220,7 @@ export default function LusionLandingPage() {
       </section>
 
       {/* Features Grid */}
-      <section className="relative min-h-screen px-8 py-24 md:py-32">
+      <section id="features" className="relative min-h-screen px-8 py-24 md:py-32">
         <motion.div
           style={{ y: y2 }}
           className="max-w-7xl mx-auto relative z-10"
@@ -233,11 +251,11 @@ export default function LusionLandingPage() {
                 className="p-6 md:p-8 border border-white/10 rounded-2xl backdrop-blur-sm hover:border-white/30 transition-colors cursor-pointer group"
               >
                 <motion.div
-                  className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl mb-4 md:mb-6"
+                  className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-[#4ca1af] to-[#2c3e50] rounded-xl mb-4 md:mb-6"
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.8 }}
                 />
-                <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 group-hover:text-purple-400 transition-colors">
+                <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 group-hover:text-[#4ca1af] transition-colors">
                   {feature.title}
                 </h3>
                 <p className="text-sm md:text-base text-gray-400">{feature.desc}</p>
@@ -263,7 +281,7 @@ export default function LusionLandingPage() {
               viewport={{ once: true }}
             >
               <motion.h3
-                className="text-3xl md:text-4xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent"
+                className="text-3xl md:text-4xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-[#4ca1af] to-[#2c3e50] bg-clip-text text-transparent"
                 whileInView={{ scale: [1, 1.1, 1] }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
@@ -296,17 +314,19 @@ export default function LusionLandingPage() {
           >
             Join the community and transform your ideas into reality
           </motion.p>
-          <motion.button
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="px-8 md:px-12 py-4 md:py-5 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full text-base md:text-lg font-semibold"
-            whileHover={{ scale: 1.05, boxShadow: '0 0 60px rgba(168,85,247,0.5)' }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Get Started Now
-          </motion.button>
+          <Link to="/signup">
+            <motion.button
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="px-8 md:px-12 py-4 md:py-5 bg-gradient-to-r from-[#4ca1af] to-[#2c3e50] rounded-full text-base md:text-lg font-semibold"
+              whileHover={{ scale: 1.05, boxShadow: '0 0 60px rgba(76, 161, 175, 0.5)' }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Get Started Now
+            </motion.button>
+          </Link>
         </div>
       </section>
 
