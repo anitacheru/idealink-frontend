@@ -51,31 +51,31 @@ export default function LusionLandingPage() {
         className="fixed top-0 w-full z-50 px-8 py-6 flex justify-between items-center backdrop-blur-sm"
       >
         <motion.div
-          className="text-2xl font-bold"
+          className="text-xl md:text-2xl font-bold"
           whileHover={{ scale: 1.05 }}
         >
           <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             IdeaLink
           </span>
         </motion.div>
-        
+
         <div className="flex gap-8 items-center">
           <motion.a
             href="#about"
-            className="text-gray-400 hover:text-white transition-colors"
+            className="text-sm md:text-base text-gray-400 hover:text-white transition-colors"
             whileHover={{ y: -2 }}
           >
             About
           </motion.a>
           <motion.a
             href="#features"
-            className="text-gray-400 hover:text-white transition-colors"
+            className="text-sm md:text-base text-gray-400 hover:text-white transition-colors"
             whileHover={{ y: -2 }}
           >
             Features
           </motion.a>
           <motion.button
-            className="px-6 py-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full text-sm font-semibold"
+            className="px-6 py-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full text-xs md:text-sm font-semibold"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -96,7 +96,7 @@ export default function LusionLandingPage() {
             transition={{ duration: 1, delay: 0.2 }}
           >
             <motion.h1
-              className="text-7xl md:text-9xl font-bold mb-6 leading-tight"
+              className="text-4xl md:text-6xl font-bold mb-6 leading-tight"
               style={{
                 transform: `translate(${mousePosition.x * 0.5}px, ${mousePosition.y * 0.5}px)`,
               }}
@@ -113,7 +113,7 @@ export default function LusionLandingPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4 }}
-            className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto"
+            className="text-base md:text-lg text-gray-400 mb-10 max-w-2xl mx-auto"
           >
             Connect innovative minds with visionary investors. Build the future together.
           </motion.p>
@@ -122,18 +122,18 @@ export default function LusionLandingPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.6 }}
-            className="flex gap-6 justify-center"
+            className="flex gap-4 md:gap-6 justify-center"
           >
             <motion.button
-              className="px-8 py-4 bg-white text-black rounded-full font-semibold text-lg"
-              whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(255,255,255,0.3)" }}
+              className="px-6 md:px-8 py-3 md:py-4 bg-white text-black rounded-full font-semibold text-sm md:text-base"
+              whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(255,255,255,0.3)' }}
               whileTap={{ scale: 0.95 }}
             >
               Explore Ideas
             </motion.button>
             <motion.button
-              className="px-8 py-4 border border-white/20 rounded-full font-semibold text-lg backdrop-blur-sm"
-              whileHover={{ scale: 1.05, borderColor: "rgba(255,255,255,0.5)" }}
+              className="px-6 md:px-8 py-3 md:py-4 border border-white/20 rounded-full font-semibold text-sm md:text-base backdrop-blur-sm"
+              whileHover={{ scale: 1.05, borderColor: 'rgba(255,255,255,0.5)' }}
               whileTap={{ scale: 0.95 }}
             >
               Submit Idea
@@ -143,7 +143,7 @@ export default function LusionLandingPage() {
 
         {/* Floating Elements */}
         <motion.div
-          className="absolute top-1/4 left-1/4 w-32 h-32 border border-purple-500/30 rounded-full"
+          className="absolute top-1/4 left-1/4 w-24 h-24 md:w-32 md:h-32 border border-purple-500/30 rounded-full"
           animate={{
             y: [0, -30, 0],
             rotate: [0, 180, 360],
@@ -151,7 +151,7 @@ export default function LusionLandingPage() {
           transition={{ duration: 8, repeat: Infinity }}
         />
         <motion.div
-          className="absolute bottom-1/3 right-1/4 w-24 h-24 border border-blue-500/30 rounded-lg"
+          className="absolute bottom-1/3 right-1/4 w-20 h-20 md:w-24 md:h-24 border border-blue-500/30 rounded-lg"
           animate={{
             y: [0, 30, 0],
             rotate: [0, -180, -360],
@@ -169,7 +169,7 @@ export default function LusionLandingPage() {
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2"
+            className="w-5 h-9 md:w-6 md:h-10 border-2 border-white/30 rounded-full flex justify-center pt-2"
           >
             <motion.div className="w-1 h-2 bg-white rounded-full" />
           </motion.div>
@@ -177,7 +177,7 @@ export default function LusionLandingPage() {
       </motion.section>
 
       {/* About Section with Parallax */}
-      <section className="relative min-h-screen flex items-center justify-center px-8 py-32">
+      <section className="relative min-h-screen flex items-center justify-center px-8 py-24 md:py-32">
         <motion.div
           style={{ y: y1 }}
           className="max-w-5xl mx-auto relative z-10"
@@ -188,12 +188,12 @@ export default function LusionLandingPage() {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-6xl font-bold mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8">
               <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                 What is IdeaLink?
               </span>
             </h2>
-            <p className="text-2xl text-gray-400 leading-relaxed">
+            <p className="text-base md:text-lg text-gray-400 leading-relaxed">
               A revolutionary platform connecting innovators with investors. 
               We bridge the gap between groundbreaking ideas and the capital needed to bring them to life.
             </p>
@@ -202,7 +202,7 @@ export default function LusionLandingPage() {
       </section>
 
       {/* Features Grid */}
-      <section className="relative min-h-screen px-8 py-32">
+      <section className="relative min-h-screen px-8 py-24 md:py-32">
         <motion.div
           style={{ y: y2 }}
           className="max-w-7xl mx-auto relative z-10"
@@ -212,16 +212,16 @@ export default function LusionLandingPage() {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 1 }}
             viewport={{ once: true }}
-            className="text-6xl font-bold text-center mb-20"
+            className="text-3xl md:text-4xl font-bold text-center mb-14 md:mb-20"
           >
             Features
           </motion.h2>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { title: "Submit Ideas", desc: "Share your innovative concepts with potential investors worldwide" },
-              { title: "Connect", desc: "Build meaningful relationships with investors who believe in your vision" },
-              { title: "Collaborate", desc: "Work together to transform ideas into successful ventures" },
+              { title: 'Submit Ideas', desc: 'Share your innovative concepts with potential investors worldwide' },
+              { title: 'Connect', desc: 'Build meaningful relationships with investors who believe in your vision' },
+              { title: 'Collaborate', desc: 'Work together to transform ideas into successful ventures' },
             ].map((feature, i) => (
               <motion.div
                 key={i}
@@ -230,17 +230,17 @@ export default function LusionLandingPage() {
                 transition={{ duration: 0.8, delay: i * 0.2 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -10 }}
-                className="p-8 border border-white/10 rounded-2xl backdrop-blur-sm hover:border-white/30 transition-colors cursor-pointer group"
+                className="p-6 md:p-8 border border-white/10 rounded-2xl backdrop-blur-sm hover:border-white/30 transition-colors cursor-pointer group"
               >
                 <motion.div
-                  className="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl mb-6"
+                  className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl mb-4 md:mb-6"
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.8 }}
                 />
-                <h3 className="text-2xl font-bold mb-4 group-hover:text-purple-400 transition-colors">
+                <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 group-hover:text-purple-400 transition-colors">
                   {feature.title}
                 </h3>
-                <p className="text-gray-400">{feature.desc}</p>
+                <p className="text-sm md:text-base text-gray-400">{feature.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -248,12 +248,12 @@ export default function LusionLandingPage() {
       </section>
 
       {/* Stats Section */}
-      <section className="relative py-32 px-8">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-16 text-center">
+      <section className="relative py-24 md:py-32 px-8">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 md:gap-16 text-center">
           {[
-            { number: "10", label: "Ideas Shared" },
-            { number: "7", label: "Active Investors" },
-            { number: "$0", label: "Funding Raised" },
+            { number: '10', label: 'Ideas Shared' },
+            { number: '7', label: 'Active Investors' },
+            { number: '$0', label: 'Funding Raised' },
           ].map((stat, i) => (
             <motion.div
               key={i}
@@ -263,13 +263,13 @@ export default function LusionLandingPage() {
               viewport={{ once: true }}
             >
               <motion.h3
-                className="text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent"
+                className="text-3xl md:text-4xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent"
                 whileInView={{ scale: [1, 1.1, 1] }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
                 {stat.number}
               </motion.h3>
-              <p className="text-gray-400 text-xl">{stat.label}</p>
+              <p className="text-sm md:text-base text-gray-400">{stat.label}</p>
             </motion.div>
           ))}
         </div>
@@ -283,7 +283,7 @@ export default function LusionLandingPage() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
             viewport={{ once: true }}
-            className="text-7xl font-bold mb-8"
+            className="text-4xl md:text-5xl font-bold mb-6 md:mb-8"
           >
             Ready to Start?
           </motion.h2>
@@ -292,7 +292,7 @@ export default function LusionLandingPage() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-2xl text-gray-400 mb-12"
+            className="text-base md:text-lg text-gray-400 mb-10 md:mb-12"
           >
             Join the community and transform your ideas into reality
           </motion.p>
@@ -301,8 +301,8 @@ export default function LusionLandingPage() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4 }}
             viewport={{ once: true }}
-            className="px-12 py-5 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full text-xl font-semibold"
-            whileHover={{ scale: 1.05, boxShadow: "0 0 60px rgba(168,85,247,0.5)" }}
+            className="px-8 md:px-12 py-4 md:py-5 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full text-base md:text-lg font-semibold"
+            whileHover={{ scale: 1.05, boxShadow: '0 0 60px rgba(168,85,247,0.5)' }}
             whileTap={{ scale: 0.95 }}
           >
             Get Started Now
@@ -311,13 +311,21 @@ export default function LusionLandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="relative border-t border-white/10 px-8 py-12">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <p className="text-gray-500">© 2025 IdeaLink. All rights reserved.</p>
-          <div className="flex gap-6">
-            <a href="#" className="text-gray-500 hover:text-white transition-colors">Twitter</a>
-            <a href="#" className="text-gray-500 hover:text-white transition-colors">LinkedIn</a>
-            <a href="#" className="text-gray-500 hover:text-white transition-colors">GitHub</a>
+      <footer className="relative border-t border-white/10 px-8 py-10 md:py-12">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-xs md:text-sm text-gray-500">
+            © 2025 IdeaLink. All rights reserved.
+          </p>
+          <div className="flex gap-4 md:gap-6">
+            <a href="#" className="text-xs md:text-sm text-gray-500 hover:text-white transition-colors">
+              Twitter
+            </a>
+            <a href="#" className="text-xs md:text-sm text-gray-500 hover:text-white transition-colors">
+              LinkedIn
+            </a>
+            <a href="#" className="text-xs md:text-sm text-gray-500 hover:text-white transition-colors">
+              GitHub
+            </a>
           </div>
         </div>
       </footer>
