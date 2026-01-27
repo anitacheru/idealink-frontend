@@ -1,14 +1,16 @@
 @import "tailwindcss";
 
-@theme {
-  --color-background: #ffffff;
-  --color-foreground: #2d3748;
-  --color-primary: #4299e1;
-  --color-primary-foreground: #ffffff;
-  --color-secondary: #f7fafc;
-  --color-secondary-foreground: #2d3748;
-  --color-border: #e2e8f0;
-  --radius: 0.75rem;
+@layer base {
+  :root {
+    --color-background: #6f0505;
+    --color-foreground: #2d3748;
+    --color-primary: rgb(8, 28, 45);
+    --color-primary-foreground: #ffffff;
+    --color-secondary: #f7fafc;
+    --color-secondary-foreground: #2d3748;
+    --color-border: #3a0a0a;
+    --radius: 0.75rem;
+  }
 }
 
 @layer base {

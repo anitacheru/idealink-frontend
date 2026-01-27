@@ -9,6 +9,7 @@ interface Idea {
   problemSolved?: string;
   solutionProposed?: string;
   status: string;
+  comments?: commentData[];
   createdAt?: string;
   interestCount?: number;
 }
@@ -18,6 +19,12 @@ interface FormData {
   description: string;
   problemSolved: string;
   solutionProposed: string;
+}
+
+interface commentData{
+  ideaId:number
+  content:string;
+  description:string;
 }
 
 export default function IdeaGeneratorDashboard() {

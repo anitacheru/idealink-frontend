@@ -1,414 +1,323 @@
-import { Link } from "react-router-dom";
-import { Lightbulb, TrendingUp, Users, Rocket, CheckCircle, ArrowRight, Menu, X, Star, Target, Zap } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
-export default function LandingPage() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+export default function LusionLandingPage() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 300], [0, 100]);
+  const y2 = useTransform(scrollY, [0, 300], [0, -100]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setMobileMenuOpen(false);
-    }
-  };
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: (e.clientX / window.innerWidth - 0.5) * 20,
+        y: (e.clientY / window.innerHeight - 0.5) * 20,
+      });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Navbar */}
-      <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            {/* Logo */}
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg">
-                <Lightbulb className="w-6 h-6" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                  IdeaLink
-                </h1>
-                <p className="text-xs text-gray-500">Connect & Innovate</p>
-              </div>
-            </div>
+    <div className="bg-black text-white overflow-hidden">
+      {/* Animated Background */}
+      <div className="fixed inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-blue-900/20" />
+        <motion.div
+          className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-purple-500/10 rounded-full blur-3xl"
+          animate={{
+            x: mousePosition.x,
+            y: mousePosition.y,
+            scale: [1, 1.2, 1],
+          }}
+          transition={{ duration: 3, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-blue-500/10 rounded-full blur-3xl"
+          animate={{
+            x: -mousePosition.x,
+            y: -mousePosition.y,
+            scale: [1.2, 1, 1.2],
+          }}
+          transition={{ duration: 4, repeat: Infinity }}
+        />
+      </div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              <button onClick={() => scrollToSection('home')} className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
-                Home
-              </button>
-              <button onClick={() => scrollToSection('about')} className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
-                About
-              </button>
-              <button onClick={() => scrollToSection('features')} className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
-                Features
-              </button>
-              <button onClick={() => scrollToSection('how-it-works')} className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
-                How It Works
-              </button>
-            </div>
-
-            {/* Auth Buttons */}
-            <div className="hidden md:flex items-center space-x-4">
-              <Link
-                to="/login"
-                className="text-gray-700 border-2 border-gray-300 rounded-lg px-5 py-2 hover:bg-gray-50 font-medium transition-all"
-              >
-                Login
-              </Link>
-              <Link
-                to="/signup"
-                className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-5 py-2 rounded-lg hover:from-blue-700 hover:to-indigo-700 font-medium shadow-md hover:shadow-lg transition-all"
-              >
-                Sign Up
-              </Link>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button 
-              className="md:hidden p-2"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-
-          {/* Mobile Menu */}
-          {mobileMenuOpen && (
-            <div className="md:hidden mt-4 pb-4 space-y-3">
-              <button onClick={() => scrollToSection('home')} className="block w-full text-left py-2 text-gray-700 hover:text-blue-600">
-                Home
-              </button>
-              <button onClick={() => scrollToSection('about')} className="block w-full text-left py-2 text-gray-700 hover:text-blue-600">
-                About
-              </button>
-              <button onClick={() => scrollToSection('features')} className="block w-full text-left py-2 text-gray-700 hover:text-blue-600">
-                Features
-              </button>
-              <button onClick={() => scrollToSection('how-it-works')} className="block w-full text-left py-2 text-gray-700 hover:text-blue-600">
-                How It Works
-              </button>
-              <div className="flex flex-col gap-2 pt-2">
-                <Link to="/login" className="text-center py-2 border-2 border-gray-300 rounded-lg">
-                  Login
-                </Link>
-                <Link to="/signup" className="text-center py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg">
-                  Sign Up
-                </Link>
-              </div>
-            </div>
-          )}
+      {/* Navigation */}
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        className="fixed top-0 w-full z-50 px-8 py-6 flex justify-between items-center backdrop-blur-sm"
+      >
+        <motion.div
+          className="text-2xl font-bold"
+          whileHover={{ scale: 1.05 }}
+        >
+          <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            IdeaLink
+          </span>
+        </motion.div>
+        
+        <div className="flex gap-8 items-center">
+          <motion.a
+            href="#about"
+            className="text-gray-400 hover:text-white transition-colors"
+            whileHover={{ y: -2 }}
+          >
+            About
+          </motion.a>
+          <motion.a
+            href="#features"
+            className="text-gray-400 hover:text-white transition-colors"
+            whileHover={{ y: -2 }}
+          >
+            Features
+          </motion.a>
+          <motion.button
+            className="px-6 py-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full text-sm font-semibold"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Get Started
+          </motion.button>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-32 pb-20 px-6 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center">
-            <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <Star className="w-4 h-4" />
-              A Student Innovation Project
-            </div>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
-              Transform Ideas Into
-              <br />
-              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                Funded Reality
+      <motion.section
+        style={{ opacity }}
+        className="relative min-h-screen flex items-center justify-center px-8"
+      >
+        <div className="max-w-6xl mx-auto text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+          >
+            <motion.h1
+              className="text-7xl md:text-9xl font-bold mb-6 leading-tight"
+              style={{
+                transform: `translate(${mousePosition.x * 0.5}px, ${mousePosition.y * 0.5}px)`,
+              }}
+            >
+              <span className="block">Transform</span>
+              <span className="block bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                Ideas Into
               </span>
-            </h1>
-            
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
-              IdeaLink bridges the gap between innovative entrepreneurs and visionary investors. 
-              Share your groundbreaking ideas, discover investment opportunities, and build the future together.
-            </p>
+              <span className="block">Reality</span>
+            </motion.h1>
+          </motion.div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link
-                to="/signup"
-                className="group flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-7 py-3 rounded-xl text-base font-semibold hover:from-blue-700 hover:to-indigo-700 shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
-              >
-                Get Started
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <button
-                onClick={() => scrollToSection('how-it-works')}
-                className="flex items-center gap-2 bg-white text-gray-700 px-7 py-3 rounded-xl text-base font-semibold border-2 border-gray-300 hover:bg-gray-50 transition-all"
-              >
-                Learn More
-              </button>
-            </div>
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.4 }}
+            className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto"
+          >
+            Connect innovative minds with visionary investors. Build the future together.
+          </motion.p>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto mt-16">
-              <div>
-                <p className="text-4xl font-bold text-blue-600">4</p>
-                <p className="text-gray-600 mt-1">Ideas Shared</p>
-              </div>
-              <div>
-                <p className="text-4xl font-bold text-indigo-600">3</p>
-                <p className="text-gray-600 mt-1">Active Investors</p>
-              </div>
-              <div>
-                <p className="text-4xl font-bold text-purple-600">$10</p>
-                <p className="text-gray-600 mt-1">Funding Raised</p>
-              </div>
-            </div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.6 }}
+            className="flex gap-6 justify-center"
+          >
+            <motion.button
+              className="px-8 py-4 bg-white text-black rounded-full font-semibold text-lg"
+              whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(255,255,255,0.3)" }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Explore Ideas
+            </motion.button>
+            <motion.button
+              className="px-8 py-4 border border-white/20 rounded-full font-semibold text-lg backdrop-blur-sm"
+              whileHover={{ scale: 1.05, borderColor: "rgba(255,255,255,0.5)" }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Submit Idea
+            </motion.button>
+          </motion.div>
         </div>
+
+        {/* Floating Elements */}
+        <motion.div
+          className="absolute top-1/4 left-1/4 w-32 h-32 border border-purple-500/30 rounded-full"
+          animate={{
+            y: [0, -30, 0],
+            rotate: [0, 180, 360],
+          }}
+          transition={{ duration: 8, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute bottom-1/3 right-1/4 w-24 h-24 border border-blue-500/30 rounded-lg"
+          animate={{
+            y: [0, 30, 0],
+            rotate: [0, -180, -360],
+          }}
+          transition={{ duration: 10, repeat: Infinity }}
+        />
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 1 }}
+          className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
+        >
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2"
+          >
+            <motion.div className="w-1 h-2 bg-white rounded-full" />
+          </motion.div>
+        </motion.div>
+      </motion.section>
+
+      {/* About Section with Parallax */}
+      <section className="relative min-h-screen flex items-center justify-center px-8 py-32">
+        <motion.div
+          style={{ y: y1 }}
+          className="max-w-5xl mx-auto relative z-10"
+        >
+          <motion.div
+            initial={{ opacity: 0, x: -100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-6xl font-bold mb-8">
+              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                What is IdeaLink?
+              </span>
+            </h2>
+            <p className="text-2xl text-gray-400 leading-relaxed">
+              A revolutionary platform connecting innovators with investors. 
+              We bridge the gap between groundbreaking ideas and the capital needed to bring them to life.
+            </p>
+          </motion.div>
+        </motion.div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
-              About IdeaLink
-            </h2>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-              We're on a mission to democratize innovation and investment, 
-              making it easier than ever to turn brilliant ideas into successful ventures.
-            </p>
-          </div>
+      {/* Features Grid */}
+      <section className="relative min-h-screen px-8 py-32">
+        <motion.div
+          style={{ y: y2 }}
+          className="max-w-7xl mx-auto relative z-10"
+        >
+          <motion.h2
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            className="text-6xl font-bold text-center mb-20"
+          >
+            Features
+          </motion.h2>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 hover:shadow-lg transition-shadow">
-              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Target className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Our Mission</h3>
-              <p className="text-gray-600">
-                To create a seamless platform where innovative ideas meet the right investors, 
-                fostering a global ecosystem of entrepreneurship and growth.
-              </p>
-            </div>
-
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-indigo-50 to-purple-50 hover:shadow-lg transition-shadow">
-              <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Zap className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Our Vision</h3>
-              <p className="text-gray-600">
-                To become the world's leading platform for idea-investment matching, 
-                empowering the next generation of entrepreneurs and innovators.
-              </p>
-            </div>
-
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 hover:shadow-lg transition-shadow">
-              <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Our Values</h3>
-              <p className="text-gray-600">
-                Transparency, innovation, and community-first approach. We believe in 
-                building trust and creating value for all our stakeholders.
-              </p>
-            </div>
+            {[
+              { title: "Submit Ideas", desc: "Share your innovative concepts with potential investors worldwide" },
+              { title: "Connect", desc: "Build meaningful relationships with investors who believe in your vision" },
+              { title: "Collaborate", desc: "Work together to transform ideas into successful ventures" },
+            ].map((feature, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: i * 0.2 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -10 }}
+                className="p-8 border border-white/10 rounded-2xl backdrop-blur-sm hover:border-white/30 transition-colors cursor-pointer group"
+              >
+                <motion.div
+                  className="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl mb-6"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.8 }}
+                />
+                <h3 className="text-2xl font-bold mb-4 group-hover:text-purple-400 transition-colors">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-400">{feature.desc}</p>
+              </motion.div>
+            ))}
           </div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="py-20 px-6 bg-gradient-to-br from-gray-50 to-blue-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
-              Powerful Features for Everyone
-            </h2>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-              Whether you're an innovator or investor, IdeaLink provides the tools you need to succeed.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-12 mb-12">
-            {/* For Idea Generators */}
-            <div className="bg-white p-8 rounded-2xl shadow-lg border-l-4 border-blue-600">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <Lightbulb className="w-6 h-6 text-blue-600" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900">For Idea Generators</h3>
-              </div>
-              
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
-                  <p className="text-gray-700">Submit and showcase your innovative ideas to a global audience</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
-                  <p className="text-gray-700">Track investor interest and engagement in real-time</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
-                  <p className="text-gray-700">Connect directly with interested investors</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
-                  <p className="text-gray-700">Secure and professional presentation of your concepts</p>
-                </div>
-              </div>
-
-              <Link
-                to="/signup"
-                className="mt-6 inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-semibold transition-all"
+      {/* Stats Section */}
+      <section className="relative py-32 px-8">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-16 text-center">
+          {[
+            { number: "500+", label: "Ideas Shared" },
+            { number: "200+", label: "Active Investors" },
+            { number: "$2M+", label: "Funding Raised" },
+          ].map((stat, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <motion.h3
+                className="text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent"
+                whileInView={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
               >
-                Start Sharing Ideas
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-
-            {/* For Investors */}
-            <div className="bg-white p-8 rounded-2xl shadow-lg border-l-4 border-indigo-600">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
-                  <TrendingUp className="w-6 h-6 text-indigo-600" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900">For Investors</h3>
-              </div>
-              
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
-                  <p className="text-gray-700">Browse and discover innovative ideas across industries</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
-                  <p className="text-gray-700">Advanced search and filtering to find perfect opportunities</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
-                  <p className="text-gray-700">Express interest and connect with entrepreneurs easily</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
-                  <p className="text-gray-700">Build your investment portfolio with promising startups</p>
-                </div>
-              </div>
-
-              <Link
-                to="/signup"
-                className="mt-6 inline-flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 font-semibold transition-all"
-              >
-                Explore Opportunities
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section id="how-it-works" className="py-20 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
-              How IdeaLink Works
-            </h2>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-              Getting started is simple. Follow these easy steps to connect and collaborate.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-2xl font-bold">
-                1
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Sign Up</h3>
-              <p className="text-gray-600">Create your account as an Idea Generator or Investor</p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-2xl font-bold">
-                2
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Share or Browse</h3>
-              <p className="text-gray-600">Submit your ideas or explore innovative concepts</p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-2xl font-bold">
-                3
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Connect</h3>
-              <p className="text-gray-600">Express interest and start conversations</p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-2xl font-bold">
-                4
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Collaborate</h3>
-              <p className="text-gray-600">Work together to bring ideas to life</p>
-            </div>
-          </div>
+                {stat.number}
+              </motion.h3>
+              <p className="text-gray-400 text-xl">{stat.label}</p>
+            </motion.div>
+          ))}
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-6 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-6">
-            Ready to Get Started?
-          </h2>
-          <p className="text-lg md:text-xl text-blue-100 mb-8">
-            Join the IdeaLink community and start connecting today.
-          </p>
-          <Link
-            to="/signup"
-            className="inline-flex items-center gap-2 bg-white text-blue-600 px-7 py-3 rounded-xl text-base font-bold hover:bg-gray-100 shadow-xl hover:shadow-2xl transition-all transform hover:scale-105"
+      <section className="relative min-h-screen flex items-center justify-center px-8">
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <motion.h2
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            className="text-7xl font-bold mb-8"
           >
-            Join IdeaLink
-            <Rocket className="w-5 h-5" />
-          </Link>
+            Ready to Start?
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-2xl text-gray-400 mb-12"
+          >
+            Join the community and transform your ideas into reality
+          </motion.p>
+          <motion.button
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="px-12 py-5 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full text-xl font-semibold"
+            whileHover={{ scale: 1.05, boxShadow: "0 0 60px rgba(168,85,247,0.5)" }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Get Started Now
+          </motion.button>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-300 py-12 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
-                  <Lightbulb className="w-5 h-5 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-white">IdeaLink</h3>
-              </div>
-              <p className="text-sm">Connecting innovators with investors to build the future.</p>
-            </div>
-
-            <div>
-              <h4 className="text-white font-semibold mb-4">Platform</h4>
-              <div className="space-y-2 text-sm">
-                <button onClick={() => scrollToSection('features')} className="block hover:text-white transition-colors">Features</button>
-                <button onClick={() => scrollToSection('how-it-works')} className="block hover:text-white transition-colors">How It Works</button>
-                <Link to="/signup" className="block hover:text-white transition-colors">Sign Up</Link>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="text-white font-semibold mb-4">Company</h4>
-              <div className="space-y-2 text-sm">
-                <button onClick={() => scrollToSection('about')} className="block hover:text-white transition-colors">About Us</button>
-                <a href="#" className="block hover:text-white transition-colors">Contact</a>
-                <a href="#" className="block hover:text-white transition-colors">Privacy Policy</a>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="text-white font-semibold mb-4">Connect</h4>
-              <div className="space-y-2 text-sm">
-                <a href="#" className="block hover:text-white transition-colors">Twitter</a>
-                <a href="#" className="block hover:text-white transition-colors">LinkedIn</a>
-                <a href="#" className="block hover:text-white transition-colors">Facebook</a>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-800 pt-8 text-center text-sm">
-            <p>© {new Date().getFullYear()} IdeaLink. All rights reserved. Built with ❤️ for innovators and investors.</p>
+      <footer className="relative border-t border-white/10 px-8 py-12">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <p className="text-gray-500">© 2025 IdeaLink. All rights reserved.</p>
+          <div className="flex gap-6">
+            <a href="#" className="text-gray-500 hover:text-white transition-colors">Twitter</a>
+            <a href="#" className="text-gray-500 hover:text-white transition-colors">LinkedIn</a>
+            <a href="#" className="text-gray-500 hover:text-white transition-colors">GitHub</a>
           </div>
         </div>
       </footer>

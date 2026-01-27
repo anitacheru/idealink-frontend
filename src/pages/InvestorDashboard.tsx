@@ -16,7 +16,14 @@ interface Idea {
   status: string;
   createdAt?: string;
   author?: Author;
+  comments?: commentData[];
   interestCount?: number;
+}
+
+interface commentData {
+  ideaId: number;
+  content: string;
+  description: string;
 }
 
 export default function InvestorDashboard() {
