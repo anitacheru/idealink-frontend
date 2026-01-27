@@ -251,9 +251,9 @@ export default function LusionLandingPage() {
       <section className="relative py-32 px-8">
         <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-16 text-center">
           {[
-            { number: "500+", label: "Ideas Shared" },
-            { number: "200+", label: "Active Investors" },
-            { number: "$2M+", label: "Funding Raised" },
+            { number: "10", label: "Ideas Shared" },
+            { number: "7", label: "Active Investors" },
+            { number: "$0", label: "Funding Raised" },
           ].map((stat, i) => (
             <motion.div
               key={i}
