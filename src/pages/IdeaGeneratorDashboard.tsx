@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from "react";
 import {
   PlusCircle,
+  Lightbulb,
+  TrendingUp,
+  Clock,
+  CheckCircle,
+  Menu,
+  X,
   LogOut,
+  User,
   Grid,
   MessageSquare,
+  Eye,
 } from "lucide-react";
 import API from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 interface Comment {
   id: number;
@@ -40,6 +49,7 @@ interface FormData {
 }
 
 export default function IdeaGeneratorDashboard() {
+  const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [ideas, setIdeas] = useState<Idea[]>([]);
   const [loading, setLoading] = useState(true);
