@@ -1,20 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   PlusCircle,
-  Lightbulb,
-  TrendingUp,
-  Clock,
-  CheckCircle,
-  Menu,
-  X,
   LogOut,
-  User,
   Grid,
   MessageSquare,
-  Eye,
 } from "lucide-react";
 import API from "../services/api";
-import { useNavigate } from "react-router-dom";
 
 interface Comment {
   id: number;
@@ -49,33 +40,22 @@ interface FormData {
 }
 
 export default function IdeaGeneratorDashboard() {
-  const navigate = useNavigate();
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen] = useState(true);
   const [ideas, setIdeas] = useState<Idea[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<"submit" | "ideas">("ideas");
 
   // 🔥 Comment states
   const [commentText, setCommentText] = useState("");
   const [commentIdeaId, setCommentIdeaId] = useState<number | null>(null);
 
-  const [formData, setFormData] = useState<FormData>({
+  const [] = useState<FormData>({
     title: "",
     description: "",
     problemSolved: "",
     solutionProposed: "",
   });
 
-  const stats = {
-    totalIdeas: ideas.length,
-    pending: ideas.filter((i) => i.status === "pending").length,
-    approved: ideas.filter((i) => i.status === "approved").length,
-    interested: ideas.reduce((sum, i) => sum + (i.interestCount || 0), 0),
-    totalComments: ideas.reduce(
-      (sum, i) => sum + (i.comments?.length || 0),
-      0
-    ),
-  };
 
   const loadIdeas = async () => {
     try {
@@ -105,22 +85,6 @@ export default function IdeaGeneratorDashboard() {
     loadIdeas();
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      await API.post("/idea", formData);
-      setFormData({
-        title: "",
-        description: "",
-        problemSolved: "",
-        solutionProposed: "",
-      });
-      loadIdeas();
-      setActiveTab("ideas");
-    } catch (err: any) {
-      alert(err.response?.data?.error || "Failed to submit idea");
-    }
-  };
 
   const submitComment = async () => {
     if (!commentText.trim() || !commentIdeaId) return;

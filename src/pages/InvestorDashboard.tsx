@@ -1,23 +1,10 @@
 import { useEffect, useState } from "react";
 import {
-  Search,
-  Lightbulb,
-  TrendingUp,
-  Eye,
-  Menu,
-  X,
   LogOut,
-  User,
-  Filter,
-  Heart,
   Briefcase,
-  MessageSquare,
-  Clock,
-  Sparkles,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import API from "../services/api";
-import { useNavigate } from "react-router-dom";
 
 interface Author {
   username?: string;
@@ -49,18 +36,17 @@ interface Idea {
 }
 
 export default function InvestorDashboard() {
-  const navigate = useNavigate();
 
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen] = useState(true);
   const [ideas, setIdeas] = useState<Idea[]>([]);
-  const [filteredIdeas, setFilteredIdeas] = useState<Idea[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filterStatus, setFilterStatus] = useState("all");
+  const [, setFilteredIdeas] = useState<Idea[]>([]);
+  const [, setLoading] = useState(true);
+  const [searchQuery] = useState("");
+  const [filterStatus] = useState("all");
 
   // 🔥 Comment states
-  const [commentIdeaId, setCommentIdeaId] = useState<number | null>(null);
-  const [commentText, setCommentText] = useState("");
+  const [] = useState<number | null>(null);
+  const [] = useState("");
 
   // Mouse animation
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -121,30 +107,8 @@ export default function InvestorDashboard() {
     setFilteredIdeas(filtered);
   }, [searchQuery, filterStatus, ideas]);
 
-  const expressInterest = async (ideaId: number) => {
-    await API.post("/interest", { ideaId });
-    loadIdeas();
-  };
 
-  const submitComment = async () => {
-    if (!commentIdeaId || !commentText.trim()) return;
 
-    await API.post("/comment", {
-      ideaId: commentIdeaId,
-      content: commentText,
-    });
-
-    setCommentText("");
-    setCommentIdeaId(null);
-    loadIdeas();
-  };
-
-  const stats = {
-    totalIdeas: ideas.length,
-    approved: ideas.filter((i) => i.status === "approved").length,
-    pending: ideas.filter((i) => i.status === "pending").length,
-    comments: ideas.reduce((s, i) => s + (i.comments?.length || 0), 0),
-  };
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
