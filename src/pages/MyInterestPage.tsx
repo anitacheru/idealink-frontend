@@ -2,13 +2,11 @@ import { useEffect, useState } from "react";
 import {
   Heart,
   Eye,
-  TrendingUp,
   MessageSquare,
   Clock,
   User,
   X,
   Search,
-  Filter as FilterIcon,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import API from "../services/api";
@@ -101,7 +99,6 @@ export default function MyInterestsPage() {
     if (!window.confirm("Remove this idea from your interests?")) return;
     
     try {
-      // You'll need to add this endpoint to backend
       await API.delete(`/interest/${interestId}`);
       loadInterests();
     } catch (err: any) {

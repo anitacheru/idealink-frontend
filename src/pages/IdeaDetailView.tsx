@@ -254,7 +254,8 @@ export default function IdeaDetailView() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <CommentSection ideaId={Number(id)} currentUserId={currentUser?.id} />
+          <CommentSection ideaId={Number(id)} currentUserId={currentUser?.id} isAuthenticated={!!currentUser}
+/>
         </motion.div>
       </main>
     </div>
