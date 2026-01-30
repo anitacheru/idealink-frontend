@@ -13,14 +13,22 @@ export default function LoginPage() {
     e.preventDefault();
     setError("");
     setLoading(true);
-    
+
     try {
       const res = await API.post("/auth/login", form);
       localStorage.setItem("token", res.data.token);
-      const role = res.data.user.role;
+      localStorage.setItem("user", JSON.stringify(res.data.user));
       
-      if (role === "investor") nav("/investor/dashboard");
-      else nav("/generator/dashboard");
+      const role = res.data.user.role;
+
+      // Route based on role
+      if (role === "admin") {
+        nav("/admin/dashboard");
+      } else if (role === "investor") {
+        nav("/investor/dashboard");
+      } else {
+        nav("/generator/dashboard");
+      }
     } catch (err: any) {
       setError(err.response?.data?.error || "Login failed. Please check your credentials.");
     } finally {
@@ -69,7 +77,7 @@ export default function LoginPage() {
               </span>
             </motion.div>
           </Link>
-          
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

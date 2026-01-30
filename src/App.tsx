@@ -6,6 +6,8 @@ import InvestorDashboard from "./pages/InvestorDashboard";
 import IdeaGeneratorDashboard from "./pages/IdeaGeneratorDashboard";
 import ExpressionsOfInterest from "./pages/ExpressionsOfInterest";
 import IdeaDetailView from "./pages/IdeaDetailView";
+import AdminDashboard from "./pages/AdminDashboard";
+import MyInterestPage from "./pages/MyInterestPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
@@ -14,6 +16,9 @@ export default function App() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
+      <Route path="/admin/dashboard" element={<AdminDashboard />} />
+      <Route path="/my-interests" element={<MyInterestPage />} />
+
       <Route
         path="/investor/dashboard"
         element={
