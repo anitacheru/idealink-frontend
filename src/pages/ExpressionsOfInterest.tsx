@@ -6,7 +6,7 @@ export default function ExpressionsOfInterest() {
   
   const load = async () => {
     try {
-      const res = await API.get("/interest");
+      const res = await API.get("/interests");  // ← Fixed: changed from "/interest" to "/interests"
       setItems(res.data);
     } catch (err) { console.error(err); }
   };
@@ -15,7 +15,7 @@ export default function ExpressionsOfInterest() {
 
   const update = async (id: number, status: string) => {
     try {
-      await API.put(`/interest/${id}`, { status });
+      await API.put(`/interests/${id}`, { status });  // ← Fixed: changed from "/interest" to "/interests"
       alert(`Interest ${status}`);
       load();
     } catch (err: any) {
