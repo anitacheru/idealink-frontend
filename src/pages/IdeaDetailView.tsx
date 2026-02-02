@@ -64,7 +64,7 @@ export default function IdeaDetailView() {
 
   const checkIfExpressedInterest = async () => {
     try {
-      const res = await API.get("/interest/user");
+      const res = await API.get("/interests/my-interests");
       const interests = res.data.interests || [];
       const hasInterest = interests.some(
         (interest: any) => interest.ideaId === Number(id)
@@ -85,7 +85,7 @@ export default function IdeaDetailView() {
         return;
       }
 
-      await API.post("/interest", { ideaId: Number(id) });
+      await API.post("/interests/interest", { ideaId: Number(id) });
       alert("Interest expressed successfully!");
       setHasExpressedInterest(true);
       loadIdea(); // Refresh to update count

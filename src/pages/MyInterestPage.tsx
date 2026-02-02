@@ -62,7 +62,7 @@ export default function MyInterestsPage() {
   const loadInterests = async () => {
     try {
       setLoading(true);
-      const res = await API.get("/interest/my-interests");
+      const res = await API.get("/interests/my-interests");
       setInterests(res.data);
       setFilteredInterests(res.data);
     } catch (err) {
@@ -99,7 +99,7 @@ export default function MyInterestsPage() {
     if (!window.confirm("Remove this idea from your interests?")) return;
     
     try {
-      await API.delete(`/interest/${interestId}`);
+      await API.delete(`/interests/${interestId}`);
       loadInterests();
     } catch (err: any) {
       alert(err.response?.data?.error || "Failed to remove interest");

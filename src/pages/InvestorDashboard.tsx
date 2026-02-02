@@ -91,7 +91,8 @@ export default function InvestorDashboard() {
 
       // Load user's interests
       try {
-        const interestsRes = await API.get("/interest/user");
+        const interestsRes = await API.get("/interests/my-interests");
+
         setMyInterests(interestsRes.data.interests || []);
       } catch (err) {
         console.error("Error loading interests:", err);
@@ -106,7 +107,7 @@ export default function InvestorDashboard() {
 
   const handleExpressInterest = async (ideaId: number) => {
     try {
-      await API.post("/interest", { ideaId });
+      await API.post("/interests/interest", { ideaId });
       alert("Interest expressed successfully!");
       loadData(); // Reload to update counts
     } catch (error: any) {
